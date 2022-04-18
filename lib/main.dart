@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:siply/app/app_routes.dart';
 import 'package:siply/module/user_registration/pages/phone_page.dart';
 
 void main() {
@@ -13,10 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Siply assignment app',
+      getPages: AppRouteName.routes,
+      initialRoute: AppRouteName.phone,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const PhonePage(),
     );
   }
 }

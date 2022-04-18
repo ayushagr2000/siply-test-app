@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:siply/module/user_registration/pages/otp_page.dart';
+import 'package:siply/app/app_routes.dart';
 
 class UserRegistrationController extends GetxController {
   final TextEditingController phoneController = TextEditingController();
   bool onPhoneScreen = true;
   bool isSwipeButtonActive = false;
 
-  void login(BuildContext context) {
+  void login() {
     onPhoneScreen = false;
     update();
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const OtpPage()));
+      AppRoutes.go(AppRouteName.otpPage);
       onPhoneScreen = true;
     });
   }

@@ -19,48 +19,55 @@ class PhonePage extends GetView<UserRegistrationController> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      children: const [
-                        PhonePageHeading(),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 20),
-                          child: Text(AppStrings.phoneTitle),
-                        ),
-                        PhoneTextField()
-                      ],
-                    ),
-                  ),
+                  renderHeadingWithTextField(),
                   const SizedBox(
                     height: 70,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Visibility(
-                        visible: controller.onPhoneScreen,
-                        child: SwipingButton(
-                          isActive: controller.isSwipeButtonActive,
-                          text: AppStrings.swipeToSubmit,
-                          activeColor: controller.isSwipeButtonActive
-                              ? Colors.green
-                              : Colors.grey,
-                          backgroundText: AppStrings.getStarted,
-                          onSwipeCallback: () {
-                            controller.login(context);
-                          },
-                        ),
-                      ),
-                      Visibility(
-                          visible: !controller.onPhoneScreen,
-                          child: const CircularProgressIndicator())
-                    ],
-                  )
+                  renderSwipeButton(controller)
                 ],
               );
             }),
       ),
+    );
+  }
+
+  Padding renderHeadingWithTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: const [
+          PhonePageHeading(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Text(AppStrings.phoneTitle),
+          ),
+          PhoneTextField()
+        ],
+      ),
+    );
+  }
+
+  Column renderSwipeButton(UserRegistrationController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Visibility(
+          visible: controller.onPhoneScreen,
+          child: SwipingButton(
+            isActive: controller.isSwipeButtonActive,
+            text: AppStrings.swipeToSubmit,
+            activeColor:
+                controller.isSwipeButtonActive ? Colors.green : Colors.grey,
+            backgroundText: AppStrings.getStarted,
+            onSwipeCallback: () {
+              controller.login();
+            },
+          ),
+        ),
+        Visibility(
+            visible: !controller.onPhoneScreen,
+            child: const CircularProgressIndicator())
+      ],
     );
   }
 }
